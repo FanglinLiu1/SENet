@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------------------------
-# Integrated AutoEncoder
+# Transformer
 # Copyright (c) 2024 Fanglin Liu. All Rights Reserved.
 # Licensed under the Apache License, Version 2.0 [see LICENSE for details]
 # ------------------------------------------------------------------------------------------------
