@@ -50,7 +50,7 @@ print(f"Device: {device}")
 # Load data
 dataset_path = "./dataset/RML2016.10a_dict.pkl"
 data_name = "RadioML 2016.10a"
-# dataset_path = "./dataset/RML22Dataset/RML22"
+# dataset_path = "./dataset/RML22/RML22"
 # data_name = "RML22"
 loader = dataset.DatasetLoader(dataset_path)
 data = loader.load_data()
