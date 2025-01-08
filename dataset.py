@@ -24,48 +24,6 @@ class DatasetLoader:
         self.mod_count = None
         self.snr_count = None
 
-    def preprocess_data(self, X, mod_snr_data):
-        # Standardization
-        # mean = X.mean(axis=0)
-        # std = X.std(axis=0)
-        # std[std == 0] = 1
-        # X = (X - mean) / std
-
-        # Normalization: [-1, 1]
-        X_min = X.min(axis=0)
-        X_max = X.max(axis=0)
-        X_range = X_max - X_min
-        X_range[X_range == 0] = 1
-        X = 2 * (X - X_min) / X_range - 1
-
-        # X = {}
-        # for mod_snr, data in mod_snr_data.items():
-            # X_min = data.min(axis=0)
-            # X_max = data.max(axis=0)
-            # X_range = X_max - X_min
-            # X_range[X_range == 0] = 1
-            # normalized_data = 2 * (data - X_min) / X_range - 1
-
-            # Q1 = np.percentile(data, 25, axis=0)
-            # Q3 = np.percentile(data, 75, axis=0)
-            # IQR = Q3 - Q1
-            # IQR[IQR == 0] = 1
-            # normalized_data = (data - Q1) / IQR
-
-            # mod, snr = mod_snr
-            # if (mod == "WBFM" and snr <= -16):
-            #     X_min, X_max = 1, 2
-            # elif (mod == "8PSK" and snr <= -16):
-            #     X_min, X_max = 2, 3
-            # else:
-            #     X_min, X_max = 0, 1
-            # X_range = X_max - X_min
-            # data = (data - data.min(axis=0)) / (data.max(axis=0) - data.min(axis=0))
-            # normalized_data = X_min + data * X_range
-            #
-            # X[mod_snr] = normalized_data
-        return X
-
     # Split data ensuring 80% for training and 20% for validation for each mod-snr
     def split_data(self, mod_snr_data):
         mod_snr_train = {}
@@ -108,15 +66,6 @@ class DatasetLoader:
         y_[np.arange(len(y)), [self.mods.index(mod) for mod, _ in y]] = 1
         return y_
 
-    def linear_interpolation(self, data, original_size, new_size):
-        x = np.linspace(0, 1, original_size)
-        x_new = np.linspace(0, 1, new_size)
-        interpolation = np.zeros((data.shape[0], data.shape[1], new_size))
-        for i in range(data.shape[0]):
-            for j in range(data.shape[1]):
-                interpolation[i, j] = np.interp(x_new, x, data[i, j])
-        return interpolation
-
     def load_data(self):
         try:
             with open(self.dataset_path, 'rb') as file:
@@ -157,19 +106,12 @@ class DatasetLoader:
 
         self.X = np.vstack(self.X)
 
-        # Preprocess data
-        # self.X = self.preprocess_data(self.X, self.mod_snr_data)
-
         # Perform the split
         mod_snr_train, mod_snr_val, train_indices, val_indices = self.split_data(self.mod_snr_data)
 
         # Concatenate data into final training and validation sets
         X_train = np.vstack(list(mod_snr_train.values()))
         X_val = np.vstack(list(mod_snr_val.values()))
-
-        # Interpolate data
-        # X_train = self.linear_interpolation(X_train, 128, 256)
-        # X_val = self.linear_interpolation(X_val, 128, 256)
 
         lbl_train = [self.lbl[i] for i in train_indices]
         lbl_val = [self.lbl[i] for i in val_indices]
@@ -186,7 +128,7 @@ class DatasetLoader:
 
 if __name__ == '__main__':
     dataset_path = "./dataset/RML2016.10a_dict.pkl"
-    # dataset_path = "./dataset/RML22Dataset/RML22"
+    # dataset_path = "./dataset/RML22/RML22"
     loader = DatasetLoader(dataset_path)
     data = loader.load_data()
 
@@ -218,6 +160,7 @@ if __name__ == '__main__':
 
             plt.tight_layout()
             plt.savefig(f'dataset/{mod}.svg')
+            
     for mod in mods:
         if mod == '8PSK':
             for snr in snrs:
@@ -230,3 +173,4 @@ if __name__ == '__main__':
                         print(f"First sample data for {mod} at {snr} dB:")
                         print(f"Real part: {data_for_plot[0]}")
                         print(f"Imaginary part: {data_for_plot[1]}")
+
