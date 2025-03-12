@@ -50,7 +50,7 @@ print(f"Device: {device}")
 # Load data
 dataset_path = "./dataset/RML2016.10a_dict.pkl"
 data_name = "RadioML 2016.10a"
-# dataset_path = "./dataset/RML22/RML22"
+# dataset_path = "./dataset/RML22.01A"
 # data_name = "RML22"
 loader = dataset.DatasetLoader(dataset_path)
 data = loader.load_data()
@@ -401,8 +401,8 @@ def plot_(model, data_loader, val_idx, device):
     plt.rcParams['font.family'] = 'Euclid'
     plt.rcParams['font.size'] = 10
     shutil.copy('weights/weights.pth', f'result/exp{j}/weights.pth')
-    shutil.copy('weights/weights_acc.pth', f'result/exp{j}/weights_acc.pth')
-    shutil.copy('weights/weights_1.pth', f'result/exp{j}/weights_1.pth')
+    # shutil.copy('weights/weights_acc.pth', f'result/exp{j}/weights_acc.pth')
+    # shutil.copy('weights/weights_1.pth', f'result/exp{j}/weights_1.pth')
 
     model.load_state_dict(torch.load(f'result/exp{j}/weights.pth', map_location=device))
     model.eval()
@@ -455,27 +455,27 @@ def plot_(model, data_loader, val_idx, device):
     for mod, mean_accuracy in mod_mean_accuracies.items():
         print(f'Modulation {mod}: Mean Accuracy = {mean_accuracy * 100:.2f}')
 
-    plt.figure(figsize=(8, 6))
+    plt.figure(figsize=(5, 5))
     markers = ['o', 's', 'D', '^', 'v', '>', '<', 'p', '*', 'h', 'H', '+']
     for i, (mod, accuracies) in enumerate(mod_accuracies.items()):
         plt.plot(unique_snrs, accuracies, label=mod, marker=markers[i % len(markers)], markersize=4, linewidth=0.7)
 
     plt.xlabel('SNR (dB)', fontsize=16, fontname='Euclid')  # SimSun
     plt.ylabel('准确率', fontsize=16, fontname='SimSun')
-    plt.title(f'{data_name}', fontsize=20, fontname='Euclid')
+    # plt.title(f'{data_name}', fontsize=20, fontname='Euclid')
     for line in plt.gca().lines:
         line.set_zorder(3)
-    legend = plt.legend(
-        loc='best',
-        fontsize=10,
-        prop={'family': 'Euclid'},
-        frameon=True,
-        facecolor='white',
-        edgecolor='none',
-        framealpha=1.0
-    )
-    legend.set_zorder(2)
-    plt.grid(True, color='gray', linestyle='--', linewidth=0.3)
+    # legend = plt.legend(
+    #     loc='best',
+    #     fontsize=10,
+    #     prop={'family': 'Euclid'},
+    #     frameon=True,
+    #     facecolor='white',
+    #     edgecolor='none',
+    #     framealpha=1.0
+    # )
+    # legend.set_zorder(2)
+    plt.grid(True, color='gray', linestyle='--', linewidth=0.2)
     if data_name == "RadioML 2016.10a":
         plt.xticks(np.arange(-20, 19, 4), fontsize=16, fontname='Euclid')
     else:
@@ -504,15 +504,15 @@ def plot_(model, data_loader, val_idx, device):
                         annot=annot, cmap='Reds', fmt="", xticklabels=mods, yticklabels=mods, annot_kws={"fontfamily": "Euclid"})
             plt.xticks(rotation=45, fontsize=16, fontname='Euclid')
             plt.yticks(rotation=45, fontsize=16, fontname='Euclid')
-            plt.xlabel('预测标签', fontsize=20, fontname='SimSun')  # fontname='Arial'
-            plt.ylabel('真实标签', fontsize=20, fontname='SimSun')
+            plt.xlabel('预测标签', fontsize=24, fontname='SimSun')  # fontname='Arial'
+            plt.ylabel('真实标签', fontsize=24, fontname='SimSun')
             cbar = ax.collections[0].colorbar
-            cbar.ax.tick_params(labelsize=20)
+            cbar.ax.tick_params(labelsize=24)
             for label in cbar.ax.get_yticklabels():
                 label.set_fontname('Euclid')
                 label.set_fontsize(16)
             mean_accuracy = snr_mean_accuracies.get(snr, 0)
-            plt.title(f'准确率={mean_accuracy * 100:.2f}%, SNR={snr}dB', fontsize=24, fontname='SimSun')
+            plt.title(f'准确率={mean_accuracy * 100:.2f}%', fontsize=24, fontname='SimSun')
             plt.savefig(f'result/exp{j}/Confusion_Matrix_{snr}.svg', format='svg', bbox_inches='tight')
             # plt.show()
             plt.close()
