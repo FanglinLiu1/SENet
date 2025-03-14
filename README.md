@@ -2,7 +2,6 @@ English | [简体中文](README_cn.md)
 
 
 <h2 align="center">A Modulation Recognition Method Combining Wavelet Denoising Convolution and Sparse Transformer</h2>
-<h2 align="center">一种结合小波去噪卷积与稀疏Transformer的调制识别方法</h2>
 <p align="center">
     <a href="https://github.com/FanglinLiu1/SENet/blob/main/LICENSE">
         <img alt="license" src="https://img.shields.io/github/license/FanglinLiu1/SENet">
