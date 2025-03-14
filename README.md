@@ -36,7 +36,7 @@ English | [简体中文](README_cn.md)
 
 
 ## Citation
-If you use `SENet` in your work, please use the following BibTeX entries:
+If you use `SENet` in your work, please like this repository and use the following BibTeX entries:
 ```
 @misc{liu,
       title={},
