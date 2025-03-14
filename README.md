@@ -24,3 +24,26 @@ English | [简体中文](README_cn.md)
 </p>
 
 ---
+
+
+## 🚀 Updates
+
+
+## 📍 Implementations
+
+
+## 🦄 Performance
+
+
+## Citation
+If you use `SENet` in your work, please use the following BibTeX entries:
+```
+@misc{liu,
+      title={},
+      author={},
+      year={},
+      eprint={},
+      archivePrefix={},
+      primaryClass={}
+}
+```
