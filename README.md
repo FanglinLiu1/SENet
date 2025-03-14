@@ -42,7 +42,7 @@ This is the official implementation of papers
 ## Citation
 If you use `SENet` in your work, please like this repository and use the following BibTeX entries:
 ```
-@misc{liu,
+@misc{,
       title={},
       author={},
       year={},
