@@ -26,7 +26,7 @@
 ---
 
 
-文章"[一种结合小波去噪卷积与稀疏Transformer的调制识别方法](https://github.com/FanglinLiu1)"的官方实现.
+文章"[一种结合小波去噪卷积与稀疏 Transformer 的调制识别方法](https://github.com/FanglinLiu1)"的官方实现.
 
 
 ## 最新动态
