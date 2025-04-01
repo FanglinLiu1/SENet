@@ -48,6 +48,6 @@ If you use `SENet` in your work, please like this repository and use the followi
       year={},
       eprint={},
       archivePrefix={},
-      primaryClass={}
+      primaryClass={},
 }
 ```
