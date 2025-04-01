@@ -27,7 +27,7 @@ English | [简体中文](README_cn.md)
 
 
 This is the official implementation of papers 
-- [一种结合小波去噪卷积与稀疏 Transformer 的调制识别方法](https://github.com/FanglinLiu1)
+- [A Modulation Recognition Method Combining Wavelet Denoising Convolution and Sparse Transformer](https://github.com/FanglinLiu1)
 
 
 ## 🚀 Updates
