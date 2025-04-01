@@ -50,6 +50,6 @@
       year={},
       eprint={},
       archivePrefix={},
-      primaryClass={}
+      primaryClass={},
 }
 ```
